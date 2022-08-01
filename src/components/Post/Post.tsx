@@ -7,10 +7,11 @@ const Container = Styled.div`
   font-size: 16px;
 `;
 
-const Post = ({ title, body: content }: IPostInterface): JSX.Element => {
+const Post = ({ title, userId, body: content }: IPostInterface): JSX.Element => {
 	return (
 		<Container>
 			<h2>{title}</h2>
+			<h4>작성자 {userId}</h4>
 			<p>{content}</p>
 		</Container>
 	);

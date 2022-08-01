@@ -23,7 +23,7 @@
 
 	"rules": {
 		"prettier/prettier": 0,
-		"@typescript-eslint/no-unsafe-assignment": "error",
+		"@typescript-eslint/no-unsafe-assignment": "warn",
 		"@typescript-eslint/no-floating-promises": 0,
 		"quotes": 0,
 		"max-len": [
