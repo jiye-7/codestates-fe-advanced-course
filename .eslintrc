@@ -8,8 +8,6 @@
 		"plugin:@typescript-eslint/recommended",
 		"plugin:@typescript-eslint/recommended-requiring-type-checking",
 		"plugin:prettier/recommended",
-		"eslint:recommended",
-		"plugin:react/recommended",
 		"prettier"
 	],
 	"plugins": ["@typescript-eslint", "react", "prettier"],
@@ -26,6 +24,7 @@
 	"rules": {
 		"prettier/prettier": 0,
 		"@typescript-eslint/no-unsafe-assignment": "error",
+		"@typescript-eslint/no-floating-promises": 0,
 		"quotes": 0,
 		"max-len": [
 			2,
@@ -35,7 +34,7 @@
 				"ignoreComments": true
 			}
 		],
-		"@typescript-eslint/explicit-function-return-type": ["warn", { "allowTypedFunctionExpressions": true }],
+		// "@typescript-eslint/explicit-function-return-type": ["warn", { "allowTypedFunctionExpressions": false }],
 		"react/prop-types": 0
 	}
 }
