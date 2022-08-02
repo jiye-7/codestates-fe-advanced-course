@@ -6,6 +6,7 @@ import thunkMiddleware from 'redux-thunk';
 import promiseMiddleware from 'redux-promise';
 import rootReducer from 'redux/reducers';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import { BrowserRouter as Router } from 'react-router-dom';
 import './index.css';
 import App from './app/App';
 import reportWebVitals from './reportWebVitals';
@@ -15,9 +16,11 @@ const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(promi
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
 	<React.StrictMode>
-		<Provider store={store}>
-			<App />
-		</Provider>
+		<Router>
+			<Provider store={store}>
+				<App />
+			</Provider>
+		</Router>
 	</React.StrictMode>
 );
 

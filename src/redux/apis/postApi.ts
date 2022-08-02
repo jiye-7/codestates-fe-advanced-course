@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import { IPostInterface } from 'module/PostInterface';
+import { IPostInterface } from 'types/PostInterface';
 
 export const getPostsAPI = () => {
 	return axios
