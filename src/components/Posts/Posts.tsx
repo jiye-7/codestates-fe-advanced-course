@@ -3,11 +3,9 @@ import { useDispatch } from 'react-redux';
 import { IPostInterface } from 'types/PostInterface';
 import { getPosts } from 'redux/actions/postAction';
 import Post from 'components/Post/Post';
-import Styled from 'styled-components';
+import styled from 'styled-components';
 
-const Container = Styled.div`
-
-`;
+const Container = styled.div``;
 
 const Posts: FC = (): JSX.Element => {
 	const dispatch = useDispatch();

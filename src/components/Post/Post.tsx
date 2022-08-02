@@ -1,25 +1,44 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Styled from 'styled-components';
+import styled from 'styled-components';
 import { IPostInterface } from 'types/PostInterface';
 
-const Container = Styled.div`
+const Container = styled.div`
 	display: flex;
 	flex-direction: column;
-	margin-top: 1rem;	
+	margin-top: 1rem;
+
+	&:hover {
+		cursor: pointer;
+	}
+
+	&:active {
+		color: gray;
+	}
 `;
 
-const Author = Styled.h4`
+const Title = styled.h1`
+	font-size: 1.2rem;
+	transition: font 0.3s ease;
+
+	&:hover {
+		font-size: 1.3rem;
+	}
+`;
+
+const Author = styled.h2`
+	font-size: 1rem;
 	text-align: right;
 `;
 
-const Line = Styled.hr`
+const Line = styled.hr`
 	margin-top: 0.5rem;
 	border-bottom: 3px solid rgb(192, 190, 190);
 `;
 
 const Post = ({ id, title, userId, body: content, page }: IPostInterface): JSX.Element => {
 	const navigate = useNavigate();
+	const [isToggle, setIsToggle] = useState<boolean>(false);
 
 	const onDetailPage = (id: number): void => {
 		navigate(`/posts/${id}`);
@@ -29,7 +48,7 @@ const Post = ({ id, title, userId, body: content, page }: IPostInterface): JSX.E
 		if (page === 'posts') {
 			return (
 				<Container onClick={(e: React.MouseEvent<HTMLElement>) => onDetailPage(id)}>
-					<h1>{title}</h1>
+					<Title>{title}</Title>
 					<Author>작성자 {userId}</Author>
 					<Line />
 				</Container>
