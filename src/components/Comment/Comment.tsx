@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 
 interface IProps {
 	name: string;
@@ -6,12 +7,41 @@ interface IProps {
 	body: string;
 }
 
+const Container = styled.div`
+	margin: 1rem 1rem;
+`;
+
+const CommentDiv = styled.div`
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+`;
+
+const Author = styled.h3`
+	font-size: 1.1rem;
+	text-weight: bold;
+	margin-bottom: 0.5rem;
+`;
+
+const Email = styled.h5`
+	font-size: 0.8rem;
+	color: gray;
+`;
+
+const Content = styled.p`
+	font-size: 1rem;
+	color: rgb(59, 56, 56);
+`;
+
 const Comment = ({ name, email, body: content }: IProps): JSX.Element => {
 	return (
-		<div>
-			<h3>{name}</h3>
-			<p>{content}</p>
-		</div>
+		<Container>
+			<CommentDiv>
+				<Author>name: {name}</Author>
+				<Email>{email}</Email>
+			</CommentDiv>
+			<Content>content: {content}</Content>
+		</Container>
 	);
 };
 

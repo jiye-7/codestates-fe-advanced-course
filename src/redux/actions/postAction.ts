@@ -12,15 +12,15 @@ export const getPosts = () => {
 		.catch((err: Error | AxiosError) => ({ type: GET_POSTS_ERROR }));
 };
 
-export const getPost = (id: string) => {
+export const getPost = (id: number) => {
 	return {
 		type: GET_POST,
-		payload: parseInt(id, 10),
+		payload: id,
 	};
 };
 
-export const getComments = (id: string) => {
-	return getCommentsAPI(parseInt(id, 10))
+export const getComments = (id: number) => {
+	return getCommentsAPI(id)
 		.then((data) => ({
 			type: GET_COMMENTS,
 			payload: data,

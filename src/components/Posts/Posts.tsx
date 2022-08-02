@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { IPostInterface } from 'types/PostInterface';
 import { getPosts } from 'redux/actions/postAction';
@@ -28,7 +28,7 @@ const Posts: FC = (): JSX.Element => {
 	return (
 		<Container>
 			{posts?.map(({ id, title, userId, body }: IPostInterface) => (
-				<Post key={id} id={id} title={title} userId={userId} body={body} page="posts" />
+				<Post key={id} id={id} title={title} userId={userId} body={body} />
 			))}
 		</Container>
 	);
