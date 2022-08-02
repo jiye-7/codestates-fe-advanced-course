@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { IPostInterface } from 'module/PostInterface';
+import { IPostInterface } from 'types/PostInterface';
 import { getPosts } from 'redux/actions/postAction';
 import Post from 'components/Post/Post';
 
@@ -11,7 +11,6 @@ const Posts = (): JSX.Element => {
 	useEffect(() => {
 		const allPosts = async (): Promise<void> => {
 			try {
-				// const { data }: AxiosResponse<IPostInterface[]> = await axios.get('https://jsonplaceholder.typicode.com/posts');
 				const data = dispatch(await getPosts());
 
 				if (data.type === 'GET_POSTS') {
@@ -26,7 +25,7 @@ const Posts = (): JSX.Element => {
 	return (
 		<div>
 			{posts?.map(({ id, title, userId, body }: IPostInterface) => (
-				<Post key={id} title={title} userId={userId} body={body} />
+				<Post key={id} id={id} title={title} userId={userId} body={body} page="posts" />
 			))}
 		</div>
 	);

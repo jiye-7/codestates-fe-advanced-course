@@ -1,6 +1,7 @@
 export interface IPostInterface {
 	userId: number;
-	id?: number;
+	id: number;
 	title: string;
 	body?: string;
+	page?: string;
 }
