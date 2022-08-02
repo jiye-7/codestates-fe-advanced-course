@@ -1,8 +1,12 @@
 import axios, { AxiosResponse } from 'axios';
-import { IPostInterface } from 'types/PostInterface';
+import { IPostInterface, IComments } from 'types/PostInterface';
 
-export const getPostsAPI = () => {
-	return axios
-		.get('https://jsonplaceholder.typicode.com/posts')
-		.then((response: AxiosResponse<IPostInterface[]>) => response.data);
+const BASE_URL = 'https://jsonplaceholder.typicode.com';
+
+export const getPostsAPI = (): Promise<IPostInterface[]> => {
+	return axios.get(`${BASE_URL}/posts`).then((response: AxiosResponse<IPostInterface[]>) => response.data);
+};
+
+export const getCommentsAPI = (id: number): Promise<IComments[]> => {
+	return axios.get(`${BASE_URL}/comments?postId=${id}`).then((response: AxiosResponse<IComments[]>) => response.data);
 };
