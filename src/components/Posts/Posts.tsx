@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { IPostInterface } from 'types/PostInterface';
 import { getPosts } from 'redux/actions/postAction';
 import Post from 'components/Post/Post';
+import styled from 'styled-components';
 
-const Posts = (): JSX.Element => {
+const Container = styled.div``;
+
+const Posts: FC = (): JSX.Element => {
 	const dispatch = useDispatch();
 	const [posts, setPosts] = useState<IPostInterface[]>([]);
 
@@ -23,11 +26,11 @@ const Posts = (): JSX.Element => {
 		allPosts();
 	}, [dispatch]);
 	return (
-		<div>
+		<Container>
 			{posts?.map(({ id, title, userId, body }: IPostInterface) => (
 				<Post key={id} id={id} title={title} userId={userId} body={body} page="posts" />
 			))}
-		</div>
+		</Container>
 	);
 };
 
