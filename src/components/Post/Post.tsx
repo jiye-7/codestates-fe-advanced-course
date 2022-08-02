@@ -4,8 +4,18 @@ import Styled from 'styled-components';
 import { IPostInterface } from 'types/PostInterface';
 
 const Container = Styled.div`
-  background-color: skyblue;
-  font-size: 16px;
+	display: flex;
+	flex-direction: column;
+	margin-top: 1rem;	
+`;
+
+const Author = Styled.h4`
+	text-align: right;
+`;
+
+const Line = Styled.hr`
+	margin-top: 0.5rem;
+	border-bottom: 3px solid rgb(192, 190, 190);
 `;
 
 const Post = ({ id, title, userId, body: content, page }: IPostInterface): JSX.Element => {
@@ -19,8 +29,9 @@ const Post = ({ id, title, userId, body: content, page }: IPostInterface): JSX.E
 		if (page === 'posts') {
 			return (
 				<Container onClick={(e: React.MouseEvent<HTMLElement>) => onDetailPage(id)}>
-					<h2>{title}</h2>
-					<h4>작성자 {userId}</h4>
+					<h1>{title}</h1>
+					<Author>작성자 {userId}</Author>
+					<Line />
 				</Container>
 			);
 		} else if (page === 'post-detail') {
