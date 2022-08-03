@@ -3,9 +3,7 @@ import { useDispatch } from 'react-redux';
 import { IPostInterface } from 'types/PostInterface';
 import { getPosts } from 'redux/actions/postAction';
 import Post from 'components/Post/Post';
-import styled from 'styled-components';
-
-const Container = styled.div``;
+import Button from 'components/Button/Button';
 
 const Posts: FC = (): JSX.Element => {
 	const dispatch = useDispatch();
@@ -26,11 +24,14 @@ const Posts: FC = (): JSX.Element => {
 		allPosts();
 	}, [dispatch]);
 	return (
-		<Container>
-			{posts?.map(({ id, title, userId, body }: IPostInterface) => (
-				<Post key={id} id={id} title={title} userId={userId} body={body} />
-			))}
-		</Container>
+		<>
+			<div className="post-container">
+				{posts?.map(({ id, title, userId, body }: IPostInterface) => (
+					<Post key={id} id={id} title={title} userId={userId} body={body} />
+				))}
+			</div>
+			<Button pageLength={posts.length / 10} />
+		</>
 	);
 };
 
