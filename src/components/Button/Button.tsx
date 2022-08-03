@@ -32,7 +32,7 @@ const ButtonContainer = ({ pageLength, handlePagination }: IProps) => {
 	return (
 		<Container>
 			<Button>{'<'}</Button>
-			{[...Array(pageLength)].map((_item, idx) => (
+			{new Array(pageLength).fill(0).map((_item, idx) => (
 				<PageButton key={idx} pageNumber={idx + 1} handlePagination={handlePagination} />
 			))}
 			<Button>{'>'}</Button>
