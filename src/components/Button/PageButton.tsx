@@ -2,9 +2,10 @@ import styled from 'styled-components';
 
 interface IProps {
 	pageNumber: number;
+	handlePagination: (selectPage: number) => void;
 }
 
-const StyledButtons = styled.button`
+const Button = styled.button`
 	font-weight: bold;
 	cursor: pointer;
 	width: 3rem;
@@ -19,8 +20,8 @@ const StyledButtons = styled.button`
 	}
 `;
 
-const PageButton = ({ pageNumber }: IProps): JSX.Element => {
-	return <StyledButtons>{pageNumber}</StyledButtons>;
+const PageButton = ({ pageNumber, handlePagination }: IProps): JSX.Element => {
+	return <Button onClick={() => handlePagination(pageNumber)}>{pageNumber}</Button>;
 };
 
 export default PageButton;
