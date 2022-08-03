@@ -3,7 +3,6 @@ export interface IPostInterface {
 	id: number;
 	title: string;
 	body: string;
-	page?: string;
 }
 
 export interface IComments {

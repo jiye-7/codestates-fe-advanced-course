@@ -28,8 +28,10 @@ const PostComments = ({ isToggle, id }: IProps): JSX.Element | null => {
 		const dispatchFunc = async () => {
 			dispatch(await getComments(id));
 		};
-		dispatchFunc();
-	}, [dispatch, id]);
+		if (isToggle) {
+			dispatchFunc();
+		}
+	}, [dispatch, id, isToggle]);
 
 	if (!isToggle) {
 		return null;

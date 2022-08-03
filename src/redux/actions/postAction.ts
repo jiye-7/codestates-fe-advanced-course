@@ -5,9 +5,9 @@ import { AxiosError } from 'axios';
 
 export const getPosts = () => {
 	return getPostsAPI()
-		.then((data: IPostInterface[]) => ({
+		.then((pageData: IPostInterface[]) => ({
 			type: GET_POSTS,
-			payload: data,
+			payload: pageData,
 		}))
 		.catch((err: Error | AxiosError) => ({ type: GET_POSTS_ERROR }));
 };
