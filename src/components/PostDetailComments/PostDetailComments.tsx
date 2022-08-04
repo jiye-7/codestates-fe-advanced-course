@@ -1,12 +1,16 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { getComments, getPost } from 'redux/actions/postAction';
 import { PostsState } from 'redux/reducers/postReducer';
 import { IComments } from 'types/PostInterface';
 import Comment from 'components/Comment/Comment';
 import styled from 'styled-components';
 import { Summary, Title, Author, Line } from '../Post/Post';
+
+interface ILocationState {
+	rememberPage: number;
+}
 
 const ToPage = styled.button`
 	width: 7rem;
@@ -44,19 +48,20 @@ const TotalComment = styled.h4`
 	}
 `;
 
-const PostDetailComments = (): JSX.Element | null => {
+const PostDetail = (): JSX.Element | null => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
+	const location = useLocation();
 	const { id } = useParams();
+	const { rememberPage } = location.state as ILocationState;
 	const { detailPost, comments } = useSelector((state: { post: PostsState }) => state.post);
 	const [isToggle, setIsToggle] = useState<boolean>(false);
 
 	useEffect(() => {
-		const dispatchPostAndComments = async () => {
+		const dispatchPostAndComments = async (): Promise<void> => {
 			dispatch(await getPost(Number(id)));
 			dispatch(await getComments(Number(id)));
 		};
-
 		dispatchPostAndComments();
 	}, [dispatch, id, isToggle]);
 
@@ -67,7 +72,7 @@ const PostDetailComments = (): JSX.Element | null => {
 	return (
 		<>
 			<Container>
-				<ToPage onClick={() => navigate('/')}>리스트로 가기</ToPage>
+				<ToPage onClick={() => navigate('/', { state: { rememberPage } })}>리스트로 가기</ToPage>
 				<Summary>
 					<Title>
 						<DescriptionSpan>아이디: </DescriptionSpan>
@@ -79,11 +84,9 @@ const PostDetailComments = (): JSX.Element | null => {
 				</Summary>
 				<PostContent>{detailPost.body}</PostContent>
 				<Line />
-				{isToggle ? (
-					<TotalComment onClick={onVisibleComments}>댓글 접기</TotalComment>
-				) : (
-					<TotalComment onClick={onVisibleComments}>댓글 {comments.length}개 보기</TotalComment>
-				)}
+				<TotalComment onClick={onVisibleComments}>
+					{isToggle ? '댓글 접기' : `댓글 ${comments.length}개 보기`}
+				</TotalComment>
 				{isToggle &&
 					comments?.map(({ id, name, email, body }: IComments) => (
 						<Comment key={id} name={name} email={email} body={body} />
@@ -93,4 +96,4 @@ const PostDetailComments = (): JSX.Element | null => {
 	);
 };
 
-export default PostDetailComments;
+export default PostDetail;

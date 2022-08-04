@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -7,6 +6,7 @@ interface IProps {
 	title: string;
 	userId: number;
 	body: string;
+	rememberPage: number;
 }
 
 export const Container = styled.div`
@@ -48,22 +48,10 @@ export const Line = styled.hr`
 	border-bottom: 3px solid rgb(192, 190, 190);
 `;
 
-const Post = ({ id, title, userId, body: content }: IProps): JSX.Element => {
+const Post = ({ id, title, userId, rememberPage }: IProps): JSX.Element => {
 	const navigate = useNavigate();
-	// const [isToggle, setIsToggle] = useState<boolean>(false);
-
-	/* useEffect(() => {
-		const onPostDetailPage = (): void => {
-			navigate(`/post/${id}`);
-		};
-		if (isToggle) onPostDetailPage();
-	}, [id, isToggle, navigate]);
-
-	const onDisplayDetailPageAndComments = () => {
-		setIsToggle(!isToggle);
-	}; */
 	const onDisplayDetailPageAndComments = (): void => {
-		navigate(`/post/${id}`);
+		navigate(`/post/${id}`, { state: { rememberPage } });
 	};
 
 	const renderPost = () => {
