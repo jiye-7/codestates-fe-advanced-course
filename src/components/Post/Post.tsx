@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { IPostInterface } from 'types/PostInterface';
+import PostComments from '../PostComments/PostComments';
+
+interface IProps {
+	id: number;
+	title: string;
+	userId: number;
+	body: string;
+}
 
 const Container = styled.div`
 	display: flex;
@@ -36,32 +42,27 @@ const Line = styled.hr`
 	border-bottom: 3px solid rgb(192, 190, 190);
 `;
 
-const Post = ({ id, title, userId, body: content, page }: IPostInterface): JSX.Element => {
-	const navigate = useNavigate();
+const PostContent = styled.p`
+	margin: 0.5rem 0rem;
+`;
+
+const Post = ({ id, title, userId, body: content }: IProps): JSX.Element => {
 	const [isToggle, setIsToggle] = useState<boolean>(false);
 
-	const onDetailPage = (id: number): void => {
-		navigate(`/posts/${id}`);
+	const onDisplayDetailPageAndComments = () => {
+		setIsToggle(!isToggle);
 	};
 
 	const renderPost = () => {
-		if (page === 'posts') {
-			return (
-				<Container onClick={(e: React.MouseEvent<HTMLElement>) => onDetailPage(id)}>
-					<Title>{title}</Title>
-					<Author>작성자 {userId}</Author>
-					<Line />
-				</Container>
-			);
-		} else if (page === 'post-detail') {
-			return (
-				<Container onClick={(e: React.MouseEvent<HTMLElement>) => onDetailPage(id)}>
-					<h2>{title}</h2>
-					<h4>작성자 {userId}</h4>
-					<p>{content}</p>
-				</Container>
-			);
-		}
+		return (
+			<Container onClick={(e: React.MouseEvent<HTMLElement>) => onDisplayDetailPageAndComments()}>
+				<Title>{title}</Title>
+				<Author>작성자 {userId}</Author>
+				{isToggle && <PostContent>{content}</PostContent>}
+				<Line />
+				<PostComments isToggle={isToggle} id={id} />
+			</Container>
+		);
 	};
 
 	return <>{renderPost()}</>;

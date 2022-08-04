@@ -1,7 +1,5 @@
-import { GET_COMMENTS } from './../actions/types';
-import { IComments } from './../../types/PostInterface';
-import { GET_POSTS, GET_POST } from 'redux/actions/types';
-import { IPostInterface } from 'types/PostInterface';
+import { IComments, IPostInterface } from './../../types/PostInterface';
+import { GET_POSTS, GET_POST, GET_COMMENTS } from 'redux/actions/types';
 
 export type PostsState = {
 	posts: IPostInterface[];
@@ -16,7 +14,6 @@ const initialState: PostsState = {
 		id: -1,
 		title: '',
 		body: '',
-		page: '',
 	},
 	comments: [],
 };

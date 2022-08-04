@@ -28,7 +28,7 @@
 		"quotes": 0,
 		"max-len": [
 			2,
-			120,
+			140,
 			{
 				"ignoreStrings": true,
 				"ignoreComments": true
