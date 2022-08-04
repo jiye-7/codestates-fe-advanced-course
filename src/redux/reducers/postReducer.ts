@@ -20,13 +20,17 @@ const initialState: PostsState = {
 
 const postReducer = (state: PostsState = initialState, action: { type: string; payload: unknown }) => {
 	switch (action.type) {
-		case GET_POSTS:
+		case GET_POSTS: {
 			const data = action.payload as IPostInterface[];
 			return { ...state, posts: data };
-		case GET_POST:
-			const id = action.payload as number;
-			const findPost = state.posts.find((post: IPostInterface) => post.id === id && post);
-			return { ...state, detailPost: findPost };
+		}
+		case GET_POST: {
+			const data = action.payload as IPostInterface;
+			// const id = action.payload as number;
+			// const findPost = state.posts.find((post: IPostInterface) => post.id === id && post);
+			// return { ...state, detailPost: findPost };
+			return { ...state, detailPost: data };
+		}
 		case GET_COMMENTS:
 			const comments = action.payload as IComments[];
 			return { ...state, comments };

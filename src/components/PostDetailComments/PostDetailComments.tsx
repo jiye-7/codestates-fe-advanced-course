@@ -1,22 +1,23 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Comment from 'components/Comment/Comment';
-import { getComments } from 'redux/actions/postAction';
+import { getComments, getPost } from 'redux/actions/postAction';
 import { PostsState } from 'redux/reducers/postReducer';
 import { IComments } from 'types/PostInterface';
 import styled from 'styled-components';
-
-/* interface IProps {
-	isToggle: boolean;
-	id: number;
-	content: string;
-} */
+import { Summary, Title, Author } from '../Post/Post';
 
 const Container = styled.div`
-	margin-top: 0.5rem;
+	display: flex;
+	flex-direction: column;
+	padding: 1rem;
 	background-color: pink;
-	border-radius: 30px;
+	border-radius: 20px;
+`;
+
+const PostContent = styled.p`
+	// margin: 0.5rem 0rem;
 `;
 
 const TotalComment = styled.h4`
@@ -24,25 +25,15 @@ const TotalComment = styled.h4`
 	text-align: right;
 `;
 
-interface ILocation {
-	id: number;
-	userId: number;
-	content: string;
-	title: string;
-	isToggle: boolean;
-}
-
-const PostDetailComments = (/* { isToggle, id, content }: IProps */): JSX.Element | null => {
+const PostDetailComments = (): JSX.Element | null => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-	const location = useLocation();
-	const { id, userId, content, title, isToggle } = location.state as ILocation;
+	const { id } = useParams();
+	const { detailPost, comments } = useSelector((state: { post: PostsState }) => state.post);
 
-	const { comments } = useSelector((state: { post: PostsState }) => state.post);
-
-	useEffect(() => {
+	/* useEffect(() => {
 		const dispatchComments = async () => {
-			dispatch(await getComments(id));
+			dispatch(await getComments(Number(id)));
 		};
 		if (isToggle) {
 			dispatchComments();
@@ -51,13 +42,25 @@ const PostDetailComments = (/* { isToggle, id, content }: IProps */): JSX.Elemen
 
 	if (!isToggle) {
 		return null;
-	}
+	} */
+
+	useEffect(() => {
+		const dispatchComments = async () => {
+			dispatch(await getPost(Number(id)));
+			dispatch(await getComments(Number(id)));
+		};
+
+		dispatchComments();
+	}, [dispatch, id]);
 
 	return (
 		<Container>
 			<button onClick={() => navigate('/')}>리스트로 가기</button>
-			<h1>detail page</h1>
-			<p>{content}</p>
+			<Summary>
+				<Title>{detailPost.title}</Title>
+				<Author>작성자 {detailPost.userId}</Author>
+			</Summary>
+			<PostContent>{detailPost.body}</PostContent>
 			<TotalComment>댓글 {comments.length}개</TotalComment>
 			{comments?.map(({ id, name, email, body }: IComments) => (
 				<Comment key={id} name={name} email={email} body={body} />
