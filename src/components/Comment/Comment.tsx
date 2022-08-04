@@ -33,11 +33,19 @@ const Content = styled.p`
 	color: rgb(59, 56, 56);
 `;
 
+const DescriptionSpan = styled.span`
+	font-size: 0.9rem;
+	color: rgb(72, 72, 72);
+`;
+
 const Comment = ({ name, email, body: content }: IProps): JSX.Element => {
 	return (
 		<Container>
 			<CommentDiv>
-				<Author>name: {name}</Author>
+				<Author>
+					<DescriptionSpan>name: </DescriptionSpan>
+					{name}
+				</Author>
 				<Email>{email}</Email>
 			</CommentDiv>
 			<Content>content: {content}</Content>
