@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import PostComments from '../PostComments/PostComments';
+import PostDetailComments from '../PostDetailComments/PostDetailComments';
 
 interface IProps {
 	id: number;
@@ -12,7 +13,8 @@ interface IProps {
 const Container = styled.div`
 	display: flex;
 	flex-direction: column;
-	margin-top: 1rem;
+	justify-content: space-between;
+	margin: 1.5rem 0.5rem;
 
 	&:hover {
 		cursor: pointer;
@@ -23,45 +25,61 @@ const Container = styled.div`
 	}
 `;
 
+const Summary = styled.div`
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin-bottom: 1.2rem;
+`;
+
 const Title = styled.h1`
-	font-size: 1.2rem;
+	font-size: 1.1rem;
 	transition: font 0.3s ease;
 
 	&:hover {
-		font-size: 1.3rem;
+		font-size: 1.12rem;
 	}
 `;
 
 const Author = styled.h2`
 	font-size: 1rem;
-	text-align: right;
 `;
 
 const Line = styled.hr`
-	margin-top: 0.5rem;
 	border-bottom: 3px solid rgb(192, 190, 190);
 `;
 
 const PostContent = styled.p`
-	margin: 0.5rem 0rem;
+	// margin: 0.5rem 0rem;
 `;
 
 const Post = ({ id, title, userId, body: content }: IProps): JSX.Element => {
+	const navigate = useNavigate();
 	const [isToggle, setIsToggle] = useState<boolean>(false);
 
 	const onDisplayDetailPageAndComments = () => {
 		setIsToggle(!isToggle);
 	};
 
+	useEffect(() => {
+		const onPostDetailPage = (): void => {
+			navigate(`/post/${id}`, { state: { id, title, userId, content, isToggle } });
+		};
+		if (isToggle) onPostDetailPage();
+	}, [content, id, isToggle, navigate, title, userId]);
+
 	const renderPost = () => {
 		return (
-			<Container onClick={(e: React.MouseEvent<HTMLElement>) => onDisplayDetailPageAndComments()}>
-				<Title>{title}</Title>
-				<Author>작성자 {userId}</Author>
-				{isToggle && <PostContent>{content}</PostContent>}
-				<Line />
-				<PostComments isToggle={isToggle} id={id} />
-			</Container>
+			<>
+				<Container onClick={(e: React.MouseEvent<HTMLElement>) => onDisplayDetailPageAndComments()}>
+					<Summary>
+						<Title>{title}</Title>
+						<Author>작성자 {userId}</Author>
+					</Summary>
+					<Line />
+				</Container>
+				{/* {isToggle && <PostDetailComments isToggle={isToggle} id={id} content={content} />} */}
+			</>
 		);
 	};
 

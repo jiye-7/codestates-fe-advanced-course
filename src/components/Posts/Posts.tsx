@@ -27,7 +27,7 @@ const Posts: FC = (): JSX.Element => {
 	}, [dispatch]);
 
 	useEffect(() => {
-		const pagePosts = posts.slice(currentPage * 10 - 10, currentPage * 10);
+		const pagePosts = posts?.slice(currentPage * 10 - 10, currentPage * 10);
 		setPagePosts(pagePosts);
 	}, [posts, currentPage]);
 
