@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 interface IProps {
 	pageNumber: number;
+	currentPage: number;
 	handlePagination: (selectPage: number) => void;
 }
 
@@ -15,6 +16,11 @@ const Button = styled.button`
 	margin-right: 0.5rem;
 
 	&:hover {
+		color: white;
+		background-color: #9fa8da;
+	}
+
+	&:focus {
 		color: white;
 		background-color: #9fa8da;
 	}

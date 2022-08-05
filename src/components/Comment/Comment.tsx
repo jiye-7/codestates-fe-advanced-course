@@ -1,10 +1,9 @@
-import React from 'react';
 import styled from 'styled-components';
 
 interface IProps {
 	name: string;
 	email: string;
-	body: string;
+	content: string;
 }
 
 const Container = styled.div`
@@ -33,14 +32,25 @@ const Content = styled.p`
 	color: rgb(59, 56, 56);
 `;
 
-const Comment = ({ name, email, body: content }: IProps): JSX.Element => {
+const DescriptionSpan = styled.span`
+	font-size: 0.9rem;
+	color: rgb(72, 72, 72);
+`;
+
+const Comment = ({ name, email, content }: IProps): JSX.Element => {
 	return (
 		<Container>
 			<CommentDiv>
-				<Author>name: {name}</Author>
+				<Author>
+					<DescriptionSpan>name: </DescriptionSpan>
+					{name}
+				</Author>
 				<Email>{email}</Email>
 			</CommentDiv>
-			<Content>content: {content}</Content>
+			<Content>
+				<DescriptionSpan>content: </DescriptionSpan>
+				{content}
+			</Content>
 		</Container>
 	);
 };

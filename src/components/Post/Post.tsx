@@ -1,18 +1,19 @@
-import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import PostComments from '../PostComments/PostComments';
 
 interface IProps {
 	id: number;
 	title: string;
 	userId: number;
 	body: string;
+	rememberPage: number;
 }
 
-const Container = styled.div`
+export const Container = styled.div`
 	display: flex;
 	flex-direction: column;
-	margin-top: 1rem;
+	justify-content: space-between;
+	margin: 1.5rem 0.5rem;
 
 	&:hover {
 		cursor: pointer;
@@ -23,44 +24,44 @@ const Container = styled.div`
 	}
 `;
 
-const Title = styled.h1`
-	font-size: 1.2rem;
+export const Summary = styled.div`
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin-bottom: 1.2rem;
+`;
+
+export const Title = styled.h1`
+	font-size: 1.1rem;
 	transition: font 0.3s ease;
 
 	&:hover {
-		font-size: 1.3rem;
+		font-size: 1.12rem;
 	}
 `;
 
-const Author = styled.h2`
+export const Author = styled.h2`
 	font-size: 1rem;
-	text-align: right;
 `;
 
-const Line = styled.hr`
-	margin-top: 0.5rem;
+export const Line = styled.hr`
 	border-bottom: 3px solid rgb(192, 190, 190);
 `;
 
-const PostContent = styled.p`
-	margin: 0.5rem 0rem;
-`;
-
-const Post = ({ id, title, userId, body: content }: IProps): JSX.Element => {
-	const [isToggle, setIsToggle] = useState<boolean>(false);
-
-	const onDisplayDetailPageAndComments = () => {
-		setIsToggle(!isToggle);
+const Post = ({ id, title, userId, rememberPage }: IProps): JSX.Element => {
+	const navigate = useNavigate();
+	const onDisplayDetailPageAndComments = (): void => {
+		navigate(`/post/${id}`, { state: { rememberPage } });
 	};
 
 	const renderPost = () => {
 		return (
 			<Container onClick={(e: React.MouseEvent<HTMLElement>) => onDisplayDetailPageAndComments()}>
-				<Title>{title}</Title>
-				<Author>작성자 {userId}</Author>
-				{isToggle && <PostContent>{content}</PostContent>}
+				<Summary>
+					<Title>{title}</Title>
+					<Author>작성자 {userId}</Author>
+				</Summary>
 				<Line />
-				<PostComments isToggle={isToggle} id={id} />
 			</Container>
 		);
 	};

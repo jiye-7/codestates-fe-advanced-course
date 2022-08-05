@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import styled from 'styled-components';
-import PageButton from './PageButton';
+import PageButton from './Button';
 
 interface IProps {
 	currentPage: number;
@@ -13,27 +12,22 @@ const Container = styled.div`
 	padding-bottom: 1rem;
 `;
 
-export const Button = styled.button`
+const Button = styled.button`
 	font-weight: bold;
-	cursor: pointer;
+	cursor: disable;
 	width: 3rem;
 	hight: 3rem;
 	padding: 1rem;
 	border-radius: 5px;
 	margin-right: 0.5rem;
-
-	&:hover {
-		color: white;
-		background-color: #9fa8da;
-	}
 `;
 
-const ButtonContainer = ({ pageLength, handlePagination }: IProps) => {
+const ButtonContainer = ({ pageLength, currentPage, handlePagination }: IProps) => {
 	return (
 		<Container>
 			<Button>{'<'}</Button>
 			{new Array(pageLength).fill(0).map((_item, idx) => (
-				<PageButton key={idx} pageNumber={idx + 1} handlePagination={handlePagination} />
+				<PageButton key={idx} pageNumber={idx + 1} handlePagination={handlePagination} currentPage={currentPage} />
 			))}
 			<Button>{'>'}</Button>
 		</Container>
