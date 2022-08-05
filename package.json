@@ -66,5 +66,6 @@
 		"eslint-plugin-react-hooks": "^4.6.0",
 		"prettier": "^2.7.1",
 		"redux-devtools-extension": "^2.13.9"
-	}
+	},
+	"homepage": "https://jiye-7.github.io/codestates-fe-advanced-course"
 }
