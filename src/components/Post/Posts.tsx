@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 import { IPostInterface } from 'types/PostInterface';
 import { getPosts } from 'redux/actions/postAction';
 import Post from 'components/Post/Post';
-import ButtonContainer from 'components/Button/Button';
+import ButtonContainer from 'components/share/Button';
 
 interface ILocationState {
 	rememberPage: number;

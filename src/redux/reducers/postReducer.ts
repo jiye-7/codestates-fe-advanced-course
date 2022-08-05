@@ -1,5 +1,5 @@
 import { IComments, IPostInterface } from './../../types/PostInterface';
-import { GET_POSTS, GET_POST, GET_COMMENTS } from 'redux/actions/types';
+import { GET_POSTS, GET_POST, GET_COMMENTS, INITIALIZATION_STATE } from 'redux/actions/types';
 
 export type PostsState = {
 	posts: IPostInterface[];
@@ -20,20 +20,20 @@ const initialState: PostsState = {
 
 const postReducer = (state: PostsState = initialState, action: { type: string; payload: unknown }) => {
 	switch (action.type) {
-		case GET_POSTS: {
+		case GET_POSTS:
 			const data = action.payload as IPostInterface[];
 			return { ...state, posts: data };
-		}
-		case GET_POST: {
-			const data = action.payload as IPostInterface;
+		case GET_POST:
+			const postData = action.payload as IPostInterface;
 			// const id = action.payload as number;
 			// const findPost = state.posts.find((post: IPostInterface) => post.id === id && post);
 			// return { ...state, detailPost: findPost };
-			return { ...state, detailPost: data };
-		}
+			return { ...state, detailPost: postData };
 		case GET_COMMENTS:
 			const comments = action.payload as IComments[];
 			return { ...state, comments };
+		case INITIALIZATION_STATE:
+			return { ...state, detailPost: action.payload, comments: action.payload };
 		default:
 			return state;
 	}
