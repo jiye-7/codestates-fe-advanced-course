@@ -76,13 +76,14 @@ const PostDetail = (): JSX.Element => {
 				<ToPage onClick={() => navigate('/', { state: { rememberPage } })}>리스트로 가기</ToPage>
 				<Summary>
 					<Title>
-						<DescriptionSpan>아이디: </DescriptionSpan>
+						<DescriptionSpan>제목: </DescriptionSpan>
 						{detailPost.title}
 					</Title>
 					<Author>
 						<DescriptionSpan>작성자: </DescriptionSpan> {detailPost.userId}
 					</Author>
 				</Summary>
+				<DescriptionSpan>내용: </DescriptionSpan>
 				<PostContent>{detailPost.body}</PostContent>
 				<Line />
 				<TotalComment onClick={onVisibleComments}>
