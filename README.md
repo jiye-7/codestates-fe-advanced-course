@@ -1,8 +1,12 @@
 ##### 배포 링크
+https://jiye-7.github.io/codestates-fe-advanced-course/
 
 <br/>
 
-##### 실행화면 gif
+##### 
+실행화면 gif
+
+https://user-images.githubusercontent.com/62678492/183029405-7b80c8b2-8e3b-4a6e-9638-cb04f10b2284.mov
 
 <br/>
 
@@ -17,7 +21,7 @@ npm start
 
 ##### 사용한 스택 목록
 
-> react, typescript, styled-components
+> react, typescript, redux, styled-components
 
 <br/>
 
@@ -61,11 +65,24 @@ npm start
 
 <details>
 <summary>구현 방법</summary>
-- getPosts
+- /posts 요청으로 가져온 포스트 데이터를 redux store에 저장하여, 전체 리스트를 가져오도록 구현하였습니다.
 </details>
 <details>
 <summary>구현하면서 어려웠던 점</summary>
 - getPosts
 </details>
 
+<br/>
+
 ##### Wireframe
+<details>
+<summary>figma 사용</summary>
+<p>post list 화면</p>
+
+![image](https://user-images.githubusercontent.com/62678492/183029856-1d134ffb-9d9c-4a6e-8ae2-d76183263619.png)
+
+<p>post detail 화면</p>
+
+![image](https://user-images.githubusercontent.com/62678492/183029888-da8d13c9-7e2b-4b08-aed2-2010bba249dc.png)
+
+</details>
