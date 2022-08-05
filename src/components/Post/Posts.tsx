@@ -45,17 +45,22 @@ const Posts = (): JSX.Element => {
 
 	return (
 		<>
-			{!posts.length && <Loading />}
-			<div className="post-container">
-				{pagePosts?.map(({ id, title, userId, body }: IPostInterface) => (
-					<Post key={id} id={id} title={title} userId={userId} body={body} rememberPage={currentPage} />
-				))}
-			</div>
-			<ButtonContainer
-				currentPage={currentPage}
-				pageLength={Math.ceil(posts.length / 10)}
-				handlePagination={handlePagePosts}
-			/>
+			{posts.length === 0 ? (
+				<Loading />
+			) : (
+				<>
+					<div className="post-container">
+						{pagePosts?.map(({ id, title, userId, body }: IPostInterface) => (
+							<Post key={id} id={id} title={title} userId={userId} body={body} rememberPage={currentPage} />
+						))}
+					</div>
+					<ButtonContainer
+						currentPage={currentPage}
+						pageLength={Math.ceil(posts.length / 10)}
+						handlePagination={handlePagePosts}
+					/>
+				</>
+			)}
 		</>
 	);
 };

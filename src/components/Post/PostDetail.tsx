@@ -7,6 +7,7 @@ import Comments from 'components/Comment/Comments';
 import styled from 'styled-components';
 import { Summary, Title, Author, Line } from '../Post/Post';
 import Loading from '../share/Loading';
+import { IPostInterface } from 'types/PostInterface';
 
 interface ILocationState {
 	rememberPage: number;
@@ -55,11 +56,15 @@ const PostDetail = (): JSX.Element => {
 	const { id } = useParams();
 	const { rememberPage } = location.state as ILocationState;
 	const { detailPost, comments } = useSelector((state: { post: PostsState }) => state.post);
+	const [detailPostData, setDetailPostData] = useState<IPostInterface>();
 	const [isToggle, setIsToggle] = useState<boolean>(false);
 
 	useEffect(() => {
 		(async (): Promise<void> => {
-			dispatch(await getPost(Number(id)));
+			const data = dispatch(await getPost(Number(id)));
+			if (data.type === 'GET_POST') {
+				setDetailPostData(data.payload);
+			}
 		})();
 	}, [dispatch, id]);
 
@@ -73,26 +78,29 @@ const PostDetail = (): JSX.Element => {
 
 	return (
 		<>
-			{!detailPost.id && <Loading />}
-			<Container>
-				<ToPage onClick={() => navigate('/', { state: { rememberPage } })}>리스트로 가기</ToPage>
-				<Summary>
-					<Title>
-						<DescriptionSpan>제목: </DescriptionSpan>
-						{detailPost.title}
-					</Title>
-					<Author>
-						<DescriptionSpan>작성자: </DescriptionSpan> {detailPost.userId}
-					</Author>
-				</Summary>
-				<DescriptionSpan>내용: </DescriptionSpan>
-				<PostContent>{detailPost.body}</PostContent>
-				<Line />
-				<TotalComment onClick={onVisibleComments}>
-					{isToggle ? '댓글 접기' : `댓글 ${comments.length}개 보기`}
-				</TotalComment>
-				<Comments isToggle={isToggle} id={Number(id)} />
-			</Container>
+			{!detailPostData ? (
+				<Loading />
+			) : (
+				<Container>
+					<ToPage onClick={() => navigate('/', { state: { rememberPage } })}>리스트로 가기</ToPage>
+					<Summary>
+						<Title>
+							<DescriptionSpan>제목: </DescriptionSpan>
+							{detailPost.title}
+						</Title>
+						<Author>
+							<DescriptionSpan>작성자: </DescriptionSpan> {detailPost.userId}
+						</Author>
+					</Summary>
+					<DescriptionSpan>내용: </DescriptionSpan>
+					<PostContent>{detailPost.body}</PostContent>
+					<Line />
+					<TotalComment onClick={onVisibleComments}>
+						{isToggle ? '댓글 접기' : `댓글 ${comments.length}개 보기`}
+					</TotalComment>
+					<Comments isToggle={isToggle} id={Number(id)} />
+				</Container>
+			)}
 		</>
 	);
 };
