@@ -6,7 +6,7 @@ https://jiye-7.github.io/codestates-fe-advanced-course/
 
 #### 실행화면 gif
 
-https://user-images.githubusercontent.com/62678492/183029405-7b80c8b2-8e3b-4a6e-9638-cb04f10b2284.mov
+https://user-images.githubusercontent.com/62678492/183045674-ef3ed73d-fb52-44ac-9d46-a03e25153c0d.mov
 
 <br/>
 
