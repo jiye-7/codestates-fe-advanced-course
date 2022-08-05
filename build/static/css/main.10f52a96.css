@@ -1,2 +1,0 @@
-:root{--bg-main-color:#e6e6e6;--bg-post-color:#d6d6d6}body{background-color:#e6e6e6;background-color:var(--bg-main-color);display:flex;font-family:Roboto,Oxygen,sans-serif;font-size:62.5%;height:100vh;justify-content:center;margin:0;overflow:hidden}body .App{background-color:#d6d6d6;background-color:var(--bg-post-color);border-radius:20px;box-shadow:0 3px 8px rgba(0,0,0,.24);margin-top:1rem;width:80vw}body .post-container{padding:1rem;width:100%}
-/*# sourceMappingURL=main.10f52a96.css.map*/

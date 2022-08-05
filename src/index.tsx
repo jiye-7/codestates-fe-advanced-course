@@ -16,7 +16,7 @@ const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(promi
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
-	<Router>
+	<Router basename={process.env.PUBLIC_URL}>
 		<GlobalStyles />
 		<Provider store={store}>
 			<App />

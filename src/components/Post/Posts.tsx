@@ -1,16 +1,17 @@
-import { FC, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { IPostInterface } from 'types/PostInterface';
 import { getPosts } from 'redux/actions/postAction';
 import Post from 'components/Post/Post';
 import ButtonContainer from 'components/share/PageButtons';
+import Loading from '../share/Loading';
 
 interface ILocationState {
 	rememberPage: number;
 }
 
-const Posts: FC = (): JSX.Element => {
+const Posts = (): JSX.Element => {
 	const dispatch = useDispatch();
 	const location = useLocation();
 	const rememberPage = (location.state as ILocationState)?.rememberPage;
@@ -44,6 +45,7 @@ const Posts: FC = (): JSX.Element => {
 
 	return (
 		<>
+			{!posts.length && <Loading />}
 			<div className="post-container">
 				{pagePosts?.map(({ id, title, userId, body }: IPostInterface) => (
 					<Post key={id} id={id} title={title} userId={userId} body={body} rememberPage={currentPage} />
