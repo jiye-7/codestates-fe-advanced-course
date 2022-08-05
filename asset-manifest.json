@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/static/css/main.10f52a96.css",
-    "main.js": "/static/js/main.24a0ff9c.js",
-    "static/js/787.63d14844.chunk.js": "/static/js/787.63d14844.chunk.js",
-    "index.html": "/index.html",
-    "main.10f52a96.css.map": "/static/css/main.10f52a96.css.map",
-    "main.24a0ff9c.js.map": "/static/js/main.24a0ff9c.js.map",
-    "787.63d14844.chunk.js.map": "/static/js/787.63d14844.chunk.js.map"
+    "main.css": "/codestates-fe-advanced-course/static/css/main.10f52a96.css",
+    "main.js": "/codestates-fe-advanced-course/static/js/main.a8284f54.js",
+    "static/js/787.63d14844.chunk.js": "/codestates-fe-advanced-course/static/js/787.63d14844.chunk.js",
+    "index.html": "/codestates-fe-advanced-course/index.html",
+    "main.10f52a96.css.map": "/codestates-fe-advanced-course/static/css/main.10f52a96.css.map",
+    "main.a8284f54.js.map": "/codestates-fe-advanced-course/static/js/main.a8284f54.js.map",
+    "787.63d14844.chunk.js.map": "/codestates-fe-advanced-course/static/js/787.63d14844.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.10f52a96.css",
-    "static/js/main.24a0ff9c.js"
+    "static/js/main.a8284f54.js"
   ]
 }
