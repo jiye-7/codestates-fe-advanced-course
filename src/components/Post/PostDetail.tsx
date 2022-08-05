@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { getComments, getPost } from 'redux/actions/postAction';
+import { getPost } from 'redux/actions/postAction';
 import { PostsState } from 'redux/reducers/postReducer';
-import { IComments } from 'types/PostInterface';
-import Comment from 'components/Comment/Comment';
+import Comments from 'components/Comment/Comments';
 import styled from 'styled-components';
 import { Summary, Title, Author, Line } from '../Post/Post';
 
@@ -60,7 +59,6 @@ const PostDetail = (): JSX.Element | null => {
 	useEffect(() => {
 		const dispatchPostAndComments = async (): Promise<void> => {
 			dispatch(await getPost(Number(id)));
-			dispatch(await getComments(Number(id)));
 		};
 		dispatchPostAndComments();
 	}, [dispatch, id, isToggle]);
@@ -87,10 +85,7 @@ const PostDetail = (): JSX.Element | null => {
 				<TotalComment onClick={onVisibleComments}>
 					{isToggle ? '댓글 접기' : `댓글 ${comments.length}개 보기`}
 				</TotalComment>
-				{isToggle &&
-					comments?.map(({ id, name, email, body }: IComments) => (
-						<Comment key={id} name={name} email={email} body={body} />
-					))}
+				<Comments isToggle={isToggle} id={Number(id)} />
 			</Container>
 		</>
 	);
