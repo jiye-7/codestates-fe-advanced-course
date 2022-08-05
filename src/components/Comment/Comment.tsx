@@ -4,7 +4,6 @@ interface IProps {
 	name: string;
 	email: string;
 	content: string;
-	// id: number;
 }
 
 const Container = styled.div`
@@ -48,7 +47,10 @@ const Comment = ({ name, email, content }: IProps): JSX.Element => {
 				</Author>
 				<Email>{email}</Email>
 			</CommentDiv>
-			<Content>content: {content}</Content>
+			<Content>
+				<DescriptionSpan>content: </DescriptionSpan>
+				{content}
+			</Content>
 		</Container>
 	);
 };

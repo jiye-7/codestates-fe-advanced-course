@@ -1,26 +1,15 @@
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import { getComments } from 'redux/actions/postAction';
 import { PostsState } from 'redux/reducers/postReducer';
 import { IComments } from 'types/PostInterface';
 import Comment from './Comment';
 
 interface IProps {
-	id: number;
 	isToggle: boolean;
+	id: number;
 }
 
 const Comments = ({ isToggle, id }: IProps): JSX.Element => {
-	const dispatch = useDispatch();
 	const { comments } = useSelector((state: { post: PostsState }) => state.post);
-
-	useEffect(() => {
-		const dispatchGetComments = async () => {
-			dispatch(await getComments(Number(id)));
-		};
-		if (isToggle) dispatchGetComments();
-	}, [dispatch, isToggle, id]);
 
 	return (
 		<>

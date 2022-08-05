@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { getPost } from 'redux/actions/postAction';
+import { getComments, getInitializationState, getPost } from 'redux/actions/postAction';
 import { PostsState } from 'redux/reducers/postReducer';
 import Comments from 'components/Comment/Comments';
 import styled from 'styled-components';
@@ -47,7 +47,7 @@ const TotalComment = styled.h4`
 	}
 `;
 
-const PostDetail = (): JSX.Element | null => {
+const PostDetail = (): JSX.Element => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const location = useLocation();
@@ -57,11 +57,15 @@ const PostDetail = (): JSX.Element | null => {
 	const [isToggle, setIsToggle] = useState<boolean>(false);
 
 	useEffect(() => {
-		const dispatchPostAndComments = async (): Promise<void> => {
+		(async (): Promise<void> => {
 			dispatch(await getPost(Number(id)));
-		};
-		dispatchPostAndComments();
+			dispatch(await getComments(Number(id)));
+		})();
 	}, [dispatch, id, isToggle]);
+
+	useEffect(() => {
+		dispatch(getInitializationState());
+	}, [dispatch]);
 
 	const onVisibleComments = () => {
 		setIsToggle(!isToggle);
