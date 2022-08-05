@@ -6,7 +6,7 @@ https://jiye-7.github.io/codestates-fe-advanced-course/
 
 #### 실행화면 gif
 
-https://user-images.githubusercontent.com/62678492/183084126-8ca3aae0-e07b-400c-a399-7d3542f6f698.mov
+https://user-images.githubusercontent.com/62678492/183096936-6addc78a-b86d-4caa-86c5-ceeb5fab49ff.mov
 
 <br/>
 
@@ -112,6 +112,36 @@ npm start
 <summary>느낀점, 개선 방법</summary>
 &nbsp; 1. 단 1개의 데이터를 찾는 것이라도, 더 효율적인 것이 무엇인지 깊게 생각하고 코드를 작성해야겠다 느꼈습니다. <br/>
 &nbsp;&nbsp; 위에서 만난 고민은 서버에 요청을 보내 그 결과를 받아 처리하는 방법으로 개선하였습니다.
+</details>
+
+<br/>
+
+#### 기억에 남는 에러, 잊지 말기
+
+<details>
+<summary>에러 발생 원인</summary>
+&nbsp; 1. 상세글 페이지에서 리스트로 돌아갈 때 effect이후에 cleanup을 하는 과정에서 에러가 발생했다. <br/>
+&nbsp;&nbsp; 원하는 리턴 타입은 void, destructor인데 action 객체를 리턴하기 때문에 에러가 발생한 것이다. <br/>
+&nbsp;&nbsp; 에러 발생 코드 <br/>
+``` 
+<br/>
+useEffect(() => {
+	return() => dispatch(getInitializationState());
+}, [dispatch]);  <br/>
+``` <br/>
+</details>
+<details>
+<summary>해결 코드</summary>
+```
+<br/>
+useEffect(() => {
+	return () => {
+		dispatch(getInitializationState());
+	};
+}, [dispatch]); <br/>
+``` <br/>
+
+
 </details>
 
 <br/>
