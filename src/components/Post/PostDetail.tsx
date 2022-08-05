@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { getComments, getInitializationState, getPost } from 'redux/actions/postAction';
+import { getInitializationState, getPost } from 'redux/actions/postAction';
 import { PostsState } from 'redux/reducers/postReducer';
 import Comments from 'components/Comment/Comments';
 import styled from 'styled-components';
 import { Summary, Title, Author, Line } from '../Post/Post';
+import Loading from '../share/Loading';
 
 interface ILocationState {
 	rememberPage: number;
@@ -72,6 +73,7 @@ const PostDetail = (): JSX.Element => {
 
 	return (
 		<>
+			{!detailPost.id && <Loading />}
 			<Container>
 				<ToPage onClick={() => navigate('/', { state: { rememberPage } })}>리스트로 가기</ToPage>
 				<Summary>
