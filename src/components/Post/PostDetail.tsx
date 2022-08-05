@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { getInitializationState, getPost } from 'redux/actions/postAction';
+import { getComments, getInitializationState, getPost } from 'redux/actions/postAction';
 import { PostsState } from 'redux/reducers/postReducer';
 import Comments from 'components/Comment/Comments';
 import styled from 'styled-components';
 import { Summary, Title, Author, Line } from '../Post/Post';
 import Loading from '../share/Loading';
-import { IPostInterface } from 'types/PostInterface';
 
 interface ILocationState {
 	rememberPage: number;
@@ -56,20 +55,21 @@ const PostDetail = (): JSX.Element => {
 	const { id } = useParams();
 	const { rememberPage } = location.state as ILocationState;
 	const { detailPost, comments } = useSelector((state: { post: PostsState }) => state.post);
-	const [detailPostData, setDetailPostData] = useState<IPostInterface>();
 	const [isToggle, setIsToggle] = useState<boolean>(false);
+	const [isLoading, setIsLoading] = useState<boolean>(true);
 
 	useEffect(() => {
 		(async (): Promise<void> => {
-			const data = dispatch(await getPost(Number(id)));
-			if (data.type === 'GET_POST') {
-				setDetailPostData(data.payload);
-			}
+			dispatch(await getPost(Number(id)));
+			dispatch(await getComments(Number(id)));
+			setIsLoading(false);
 		})();
 	}, [dispatch, id]);
 
 	useEffect(() => {
-		dispatch(getInitializationState());
+		return () => {
+			dispatch(getInitializationState());
+		};
 	}, [dispatch]);
 
 	const onVisibleComments = () => {
@@ -78,7 +78,7 @@ const PostDetail = (): JSX.Element => {
 
 	return (
 		<>
-			{!detailPostData ? (
+			{isLoading ? (
 				<Loading />
 			) : (
 				<Container>
@@ -98,7 +98,7 @@ const PostDetail = (): JSX.Element => {
 					<TotalComment onClick={onVisibleComments}>
 						{isToggle ? '댓글 접기' : `댓글 ${comments.length}개 보기`}
 					</TotalComment>
-					<Comments isToggle={isToggle} id={Number(id)} />
+					<Comments isToggle={isToggle} />
 				</Container>
 			)}
 		</>

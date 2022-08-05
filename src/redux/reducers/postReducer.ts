@@ -33,7 +33,16 @@ const postReducer = (state: PostsState = initialState, action: { type: string; p
 			const comments = action.payload as IComments[];
 			return { ...state, comments };
 		case INITIALIZATION_STATE:
-			return { ...state, detailPost: action.payload, comments: action.payload };
+			return {
+				...state,
+				detailPost: {
+					userId: -1,
+					id: -1,
+					title: '',
+					body: '',
+				},
+				comments: action.payload,
+			};
 		default:
 			return state;
 	}
