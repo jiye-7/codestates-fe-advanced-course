@@ -59,9 +59,8 @@ const PostDetail = (): JSX.Element => {
 	useEffect(() => {
 		(async (): Promise<void> => {
 			dispatch(await getPost(Number(id)));
-			dispatch(await getComments(Number(id)));
 		})();
-	}, [dispatch, id, isToggle]);
+	}, [dispatch, id]);
 
 	useEffect(() => {
 		dispatch(getInitializationState());

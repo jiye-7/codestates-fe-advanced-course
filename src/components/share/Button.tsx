@@ -1,18 +1,12 @@
 import styled from 'styled-components';
-import PageButton from './PageButton';
 
 interface IProps {
+	pageNumber: number;
 	currentPage: number;
-	pageLength: number;
 	handlePagination: (selectPage: number) => void;
 }
 
-const Container = styled.div`
-	text-align: center;
-	padding-bottom: 1rem;
-`;
-
-export const Button = styled.button`
+const Button = styled.button`
 	font-weight: bold;
 	cursor: pointer;
 	width: 3rem;
@@ -25,18 +19,15 @@ export const Button = styled.button`
 		color: white;
 		background-color: #9fa8da;
 	}
+
+	&:focus {
+		color: white;
+		background-color: #9fa8da;
+	}
 `;
 
-const ButtonContainer = ({ pageLength, handlePagination }: IProps) => {
-	return (
-		<Container>
-			<Button>{'<'}</Button>
-			{new Array(pageLength).fill(0).map((_item, idx) => (
-				<PageButton key={idx} pageNumber={idx + 1} handlePagination={handlePagination} />
-			))}
-			<Button>{'>'}</Button>
-		</Container>
-	);
+const PageButton = ({ pageNumber, handlePagination }: IProps): JSX.Element => {
+	return <Button onClick={() => handlePagination(pageNumber)}>{pageNumber}</Button>;
 };
 
-export default ButtonContainer;
+export default PageButton;
